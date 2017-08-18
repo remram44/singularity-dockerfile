@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eu
+
+tag_start=$(expr index "$IMAGE_NAME" :)
+repo_name=${IMAGE_NAME:0:tag_start-1}
+
+for tag in 2.2; do
+    docker tag $IMAGE_NAME ${repo_name}:${tag}
+    docker push ${repo_name}:${tag}
+done
